@@ -8,6 +8,14 @@
         "index": 20
       }
     ],
+    "frontend/models.py": [
+      {
+        "id": "ab0d8dba-85fe-4d67-a4c0-fbac244e0083",
+        "line": 10,
+        "version": 9,
+        "index": 252
+      }
+    ],
     "templates/base.html": [
       {
         "id": "f068726e-73bb-4251-912a-6a8950cf0e03",
