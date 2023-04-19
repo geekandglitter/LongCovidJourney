@@ -7,17 +7,26 @@ from operator import itemgetter
 from bs4 import BeautifulSoup
 from .models import AllContents
 from django.contrib.auth.decorators import user_passes_test
+from django.urls import path
+from django.contrib.auth.decorators import login_required, user_passes_test
+
+#from django.contrib.auth.decorators import login_required, user_passes_test
+
 
 # Create your views here.
 def index(request):
   return render(request, "frontend/index.html", {})
+def is_superuser(user):
+    return user.is_superuser
+  
+  
 
 
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
 
 def not_authorized(request):
-    return render(request, 'frontend/not_authorized.html',{})
+    return render(request, 'frontend/not_authorized.html', {})
 
 
 def soup_scrape(request):
@@ -41,7 +50,13 @@ def soup_scrape(request):
 """
  
 #@user_passes_test(lambda user: user.is_superuser)
-@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+@user_passes_test(is_superuser)
+ 
+#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+@login_required
+@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+@login_required
+@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
 def admin_findallposts(request):
  
     
@@ -151,6 +166,11 @@ def findallposts(request):
 #############
 #@user_passes_test(lambda user: user.is_superuser)
 @user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+@user_passes_test(is_superuser)
+@login_required
+@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+
+
 def admin_indexsearch(request):
     '''
     Scrape the contents of every recipe post
@@ -195,5 +215,10 @@ def admin_indexsearch(request):
   
 #@user_passes_test(lambda user: user.is_superuser)
 @user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+@login_required
+@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+#@user_passes_test(is_superuser)
+@login_required
+@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
 def admin_home(request):
   return render(request, "frontend/admin_home.html", {})
