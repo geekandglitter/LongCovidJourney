@@ -26,7 +26,7 @@ urlpatterns = [
     path("admin_home", views.admin_home),
     path("findallposts", views.findallposts),
     #path("not_authorized", views.not_authorized),
-    path('not_authorized/', views.not_authorized, name='not_authorized'),
+    #path('not_authorized', views.not_authorized, name='not_authorized'),
      
   
 ]

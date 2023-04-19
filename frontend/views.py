@@ -25,8 +25,7 @@ def is_superuser(user):
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
 
-def not_authorized(request):
-    return render(request, 'frontend/not_authorized.html', {})
+#def not_authorized(request):   #return render(request, 'frontend/not_authorized.html', {})
 
 
 def soup_scrape(request):
@@ -50,13 +49,12 @@ def soup_scrape(request):
 """
  
 #@user_passes_test(lambda user: user.is_superuser)
-@user_passes_test(is_superuser)
+#@user_passes_test(is_superuser)
  
-#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
-@login_required
-@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
-@login_required
-@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+ 
+ 
+#@user_passes_test(lambda user: user.is_superuser, login_url="frontend/index.html")
+@user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_findallposts(request):
  
     
@@ -165,11 +163,11 @@ def findallposts(request):
 
 #############
 #@user_passes_test(lambda user: user.is_superuser)
-@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
-@user_passes_test(is_superuser)
-@login_required
-@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
-
+#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+#@user_passes_test(is_superuser)
+#@login_required
+#@user_passes_test(is_superuser, login_url='frontend/not_authorized', redirect_field_name=None)
+@user_passes_test(lambda user: user.is_superuser, login_url='/')
 
 def admin_indexsearch(request):
     '''
@@ -214,11 +212,13 @@ def admin_indexsearch(request):
  
   
 #@user_passes_test(lambda user: user.is_superuser)
-@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
-@login_required
-@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
+#@login_required
+#@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
 #@user_passes_test(is_superuser)
-@login_required
-@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+#@login_required
+#@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+@user_passes_test(lambda user: user.is_superuser, login_url='/')
+
 def admin_home(request):
   return render(request, "frontend/admin_home.html", {})
