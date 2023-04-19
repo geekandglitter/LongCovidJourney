@@ -6,14 +6,11 @@ from .models import AllPosts
 from operator import itemgetter
 from bs4 import BeautifulSoup
 from .models import AllContents
-from django.contrib.auth.decorators import user_passes_test
-from django.urls import path
-from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.decorators import user_passes_test 
 
-#from django.contrib.auth.decorators import login_required, user_passes_test
+ 
 
-
-# Create your views here.
+ 
 def index(request):
   return render(request, "frontend/index.html", {})
 def is_superuser(user):
@@ -25,22 +22,13 @@ def is_superuser(user):
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
 
-#def not_authorized(request):   #return render(request, 'frontend/not_authorized.html', {})
+ 
 
 
 def soup_scrape(request):
   return render(request, "frontend/soup_scrape.html", {})
   
-# this view makes sure the user is a superuser first before they can perform admin functions
  
-
-
-
- 
-  
-  
-# this is the view that goes into the blog, gets all the blog titles and their urls, and puts them in a model
-
 
 ###################################################
 # This view GETS the posts using Google Blogger API and "request.get" for the admin and puts the results in a model  
@@ -48,12 +36,7 @@ def soup_scrape(request):
 """ This view uses the Google Blogger API to retreive all the posts. All I needed was an API key.  Uses the blogger API and the requests module to get all the posts, and stores one recipe per record in the database
 """
  
-#@user_passes_test(lambda user: user.is_superuser)
-#@user_passes_test(is_superuser)
  
- 
- 
-#@user_passes_test(lambda user: user.is_superuser, login_url="frontend/index.html")
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_findallposts(request):
  
@@ -162,11 +145,7 @@ def findallposts(request):
 
 
 #############
-#@user_passes_test(lambda user: user.is_superuser)
-#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
-#@user_passes_test(is_superuser)
-#@login_required
-#@user_passes_test(is_superuser, login_url='frontend/not_authorized', redirect_field_name=None)
+ 
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 
 def admin_indexsearch(request):
@@ -211,13 +190,7 @@ def admin_indexsearch(request):
 
  
   
-#@user_passes_test(lambda user: user.is_superuser)
-#@user_passes_test(lambda user: user.is_superuser, login_url='frontend/not_authorized')
-#@login_required
-#@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
-#@user_passes_test(is_superuser)
-#@login_required
-#@user_passes_test(is_superuser, login_url='not_authorized', redirect_field_name=None)
+ 
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 
 def admin_home(request):
