@@ -33,16 +33,15 @@ def search_func(user_terms):
     queryset=[None] * num_terms # Initialize queryset list with None    
     for i, term in enumerate(user_terms):
         queryset[i] = AllContents.objects.filter(fullpost__icontains=term)\
-                                         .values_list('hyperlink', 'title')   # We now have a list of querysets  
-    
+                                         .values_list('hyperlink', 'title')   # We now have a list of querysets     
 
      
-    # Loop through any unwanted ingredients and exclude them    
+ # Loop through any unwanted ingredients and exclude them    
     for neg_term in unwanted_ingredients:
         for j in range(0,num_terms):
             queryset[j] = queryset[j].exclude(fullpost__icontains=neg_term)   
 
-    # So now we have one or more querysets (one queryset for each search term)
+ # So now we have one or more querysets (one queryset for each search term)
     # each of which each contains a list of tuples. We need to convert the list(s) of tuples to list(s) of lists.     
     for j in range(0, num_terms): # convert to a list of lists
         q_converted[j]=list(map(list, queryset[j]))     

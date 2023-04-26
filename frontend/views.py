@@ -7,45 +7,28 @@ from operator import itemgetter
 from bs4 import BeautifulSoup
 from .models import AllContents
 from django.contrib.auth.decorators import user_passes_test 
-from frontend.utils import search_func 
-# this function does the model query heavy lifting for modelsearch_view 
- 
-from .forms import UserForm
-
- 
+from frontend.utils import search_func # this function does the model query heavy lifting for modelsearch_view 
+from .forms import UserForm 
 
  
 def index(request):
   return render(request, "frontend/index.html", {})
 def is_superuser(user):
-    print ("User is", user)
-    print("Truthiness is", user.is_superuser)
-    return user.is_superuser
-  
-  
-
-
+  return user.is_superuser
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
-
- 
-
-
 def soup_scrape(request):
-  return render(request, "frontend/soup_scrape.html", {})
-  
+  return render(request, "frontend/soup_scrape.html", {}) 
  
 
 ###################################################
 # This view GETS the posts using Google Blogger API and "request.get" for the admin and puts the results in a model  
 ###################################################
 """ This view uses the Google Blogger API to retreive all the posts. All I needed was an API key.  Uses the blogger API and the requests module to get all the posts, and stores one recipe per record in the database
-"""
- 
+""" 
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
-def admin_findallposts(request):
- 
+def admin_findallposts(request): 
     
     def request_by_year(edate, sdate):
         # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.
@@ -93,17 +76,11 @@ def admin_findallposts(request):
 
     return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
 
-     
-
-
-
 ###################################################
 # This view GETS the posts for the end user using Google Blogger API and # "request.get" and shows the results
 ###################################################
 """ This view uses the Google Blogger API to retreive all the posts. All I needed was an API key. 
-"""
-
- 
+""" 
 def findallposts(request):
 
     def request_by_year(edate, sdate):
@@ -144,16 +121,9 @@ def findallposts(request):
 
     return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
 
- 
-
-
-
-
-
 #############
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
-
 def admin_indexsearch(request):
     '''
     Scrape the contents of every recipe post
@@ -188,21 +158,13 @@ def admin_indexsearch(request):
             )
         except IntegrityError:
             return render(request, 'frontend/error')    
-        newrec.save()
-      
-
+        newrec.save() 
              
-    return render(request, "frontend/admin_indexsearch.html", {})
-
- 
-  
+    return render(request, "frontend/admin_indexsearch.html", {})  
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_home(request):
-  print("HI I'm in admin_home")
   return render(request, "frontend/admin_home.html", {})
-
-
 
 ############# 
 def keywordsearch(request):
@@ -223,7 +185,7 @@ def keywordsearch(request):
             if form.data['user_search_terms'][-1] == ",": # Ditch any trailing commas          
            
                 form.data['user_search_terms'] = form.data['user_search_terms'][:-1]
-                i = 1
+                
                 while True:
                     if form.data['user_search_terms'][-1] == ",":
                         form.data['user_search_terms'] = form.data['user_search_terms'][:-1]
@@ -242,12 +204,11 @@ def keywordsearch(request):
             if form.is_valid():    
                 cd = form.cleaned_data  # Clean the user input
                 user_terms = cd['user_search_terms']  # See forms.py
-                user_terms = [each_string.lower() for each_string in user_terms] # I like them to all be lowercase               
-                context = search_func(user_terms) 
-              
-              # The function does all the query heavy lifting                               
-                context.update({'form': form}) 
-            
+                user_terms = [each_string.lower() for each_string in user_terms] 
+                # I like them to all be lowercase               
+                context = search_func(user_terms)  
+                # The search_func does all the query heavy lifting 
+                context.update({'form': form})             
             else:    
                 context = {'form': form}       
             return render(request, 'frontend/keywordsearch.html', context)    

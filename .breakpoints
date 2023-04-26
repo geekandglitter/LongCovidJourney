@@ -8,6 +8,14 @@
         "index": 20
       }
     ],
+    "django_project/settings.py": [
+      {
+        "id": "21e57024-722f-46d6-9ee1-e61ef2df5fa3",
+        "line": 32,
+        "version": 192,
+        "index": 698
+      }
+    ],
     "frontend/models.py": [
       {
         "id": "ab0d8dba-85fe-4d67-a4c0-fbac244e0083",
