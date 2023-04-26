@@ -25,8 +25,9 @@ urlpatterns = [
     path("admin_indexsearch", views.admin_indexsearch),
     path("admin_home", views.admin_home),
     path("findallposts", views.findallposts),
-    #path("not_authorized", views.not_authorized),
-    #path('not_authorized', views.not_authorized, name='not_authorized'),
+    path("admin_findallposts", views.admin_findallposts),
+    path("keywordsearch", views.keywordsearch),
+ 
      
   
 ]
