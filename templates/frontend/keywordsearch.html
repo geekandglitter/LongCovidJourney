@@ -15,7 +15,15 @@
   <p>
     <!-- Below maybe I can loop through the comma separated search terms in item.0, and if any are in the title, then 
     make the title bold. Better is to make bold the term in the title -->
-  <p style="font-size: 16px">Notice that if your search term is in the title, it's in bold</p>  
+    
+<br>
+<h1>A few more examples</h1>
+ 
+<p style="font-size: 15px">cannabis, anti-inflammatory, sensory overload, hand tremors, depression, anxiety, PASC, traumatic brain injury, diagnosis code</p> 
+ 
+<br>
+<h1>Results</h1>
+<p style="font-size: 16px">Notice that if your search term is in the title, it's in bold</p>
   {% for item in trimmed_list %}
     
        <span style="margin-bottom: 25px"><b>{{item.0 | safe}}</b><br><a href= "{{item.1 | safe}}"> {{item.2 | safe}}</a> <br></span> <br>
@@ -28,10 +36,5 @@
    
 {% endblock content %}
 
-
-<!--  {% if item.0|lower|slice:-1 in item.2|lower %}
-       <span style="margin-bottom: 25px"><b>{{item.0 | safe}}</b><br><a href= "{{item.1 | safe}}"> <b>{{item.2 | safe}}</b></a> <br></span> <br>
-    {% else %}  
-       <span style="margin-bottom: 25px"><b>{{item.0 | safe}}</b><br><a href= "{{item.1 | safe}}"> {{item.2 | safe}}</a> <br></span> <br>
-    {% endif %}  -->
+ 
  
