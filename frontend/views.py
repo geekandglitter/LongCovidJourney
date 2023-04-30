@@ -76,54 +76,11 @@ def admin_findallposts(request):
 
     return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
 
-###################################################
-# This view GETS the posts for the end user using Google Blogger API and # "request.get" and shows the results
-###################################################
-""" This view uses the Google Blogger API to retreive all the posts. All I needed was an API key. 
-""" 
-def findallposts(request):
-
-    def request_by_year(edate, sdate):
-
-        # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.
-
-        url_part_1 = "https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts?endDate="
-        url_part_2 = edate + "&fetchBodies=false&maxResults=500&startDate=" + sdate
-        url_part_3 = "&status=live&view=READER&fields=items(title%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk"
-        url = url_part_1 + url_part_2 + url_part_3
-
-        r = requests.get(url, stream=True)
-        q = json.loads(r.text)  # this is the better way to unstring it
-        if not q:
-            s = []
-        else:
-            s = q['items']
-
-        return s
-
-    accum_list = []
-    c_year = int(d.datetime.now().year)
-
-    for the_year in range(2014, c_year + 1):
-        enddate = str(the_year) + "-12-31T00%3A00%3A00-00%3A00"
-        startdate = str(the_year) + "-01-01T00%3A00%3A00-00%3A00"
-
-        t = request_by_year(enddate, startdate)
-        accum_list = accum_list + t
-
-    sorteditems = sorted(accum_list, key=itemgetter('title'), reverse=True)
-    counter = 0
-    newstring = " "
-    for mylink in sorteditems:
-        counter += 1
-        newstring = "<a href=" + mylink['url'] + ">" + \
-            mylink['title'] + "</a>" + "<br>" + newstring
-
-    return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
+ 
 
 #############
  
-@user_passes_test(lambda user: user.is_superuser, login_url='/')
+#@user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_indexsearch(request):
     '''
     Scrape the contents of every recipe post
@@ -161,6 +118,8 @@ def admin_indexsearch(request):
         newrec.save() 
              
     return render(request, "frontend/admin_indexsearch.html", {})  
+
+############# 
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_home(request):
@@ -219,5 +178,21 @@ def keywordsearch(request):
     return render(request, 'frontend/keywordsearch.html', context) 
 
 
-
+############# 
+def userseesposts(request):
+  """
+  retrieve the contents of the AllPosts model
+  """
+  
+  all_posts = AllPosts.objects.all()
+  #print(all_posts)
+  accum=""
+  counter=0
+  for one_post in all_posts:
+    counter+=1 
+    accum=accum +(str(one_post))
+   
  
+  return render(request, "frontend/userseesposts.html", {'allofit': accum, 'count': counter})  
+
+

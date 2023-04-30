@@ -28,20 +28,28 @@
       {
         "id": "f068726e-73bb-4251-912a-6a8950cf0e03",
         "line": 3,
-        "version": 115,
+        "version": 116,
         "index": 34
       },
       {
         "id": "cbd80639-8869-40d9-9e90-669529a077bd",
         "line": 6,
-        "version": 115,
+        "version": 116,
         "index": 55
       },
       {
         "id": "223ab5a4-6774-4114-ab08-dfed14012e04",
         "line": 7,
-        "version": 115,
+        "version": 116,
         "index": 62
+      }
+    ],
+    "templates/frontend/findallposts.html": [
+      {
+        "id": "e9b25f1e-2a4d-4b58-b98b-895b45b3b7a5",
+        "line": 10,
+        "version": 1,
+        "index": 219
       }
     ]
   }
