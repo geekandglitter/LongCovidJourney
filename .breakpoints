@@ -12,7 +12,7 @@
       {
         "id": "21e57024-722f-46d6-9ee1-e61ef2df5fa3",
         "line": 32,
-        "version": 192,
+        "version": 201,
         "index": 698
       }
     ],
@@ -22,6 +22,20 @@
         "line": 10,
         "version": 9,
         "index": 252
+      }
+    ],
+    "frontend/views.py": [
+      {
+        "id": "d81ee57d-93f0-483f-8063-2680549e3050",
+        "line": 204,
+        "version": 7665,
+        "index": 8149
+      },
+      {
+        "id": "fceeb003-a864-4c6d-82c1-1247a4e27aee",
+        "line": 206,
+        "version": 7665,
+        "index": 8179
       }
     ],
     "templates/base.html": [

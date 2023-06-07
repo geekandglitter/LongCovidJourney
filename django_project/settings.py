@@ -36,8 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend.apps.BlogExtConfig',
+    'django_extensions', 
     
 ]
+ 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

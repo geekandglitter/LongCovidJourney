@@ -9,6 +9,10 @@ from .models import AllContents
 from django.contrib.auth.decorators import user_passes_test 
 from frontend.utils import search_func # this function does the model query heavy lifting for modelsearch_view 
 from .forms import UserForm 
+from django.db import IntegrityError
+import sys
+
+
 
  
 def index(request):
@@ -96,7 +100,7 @@ def admin_indexsearch(request):
     '''
     # First, get all the urls from AllPosts
     instance = AllPosts.objects.filter().values_list('url', 'anchortext')
-    from django.db import IntegrityError
+    
     # For now, I'm starting over each time, by emptying out AllContents
     AllContents.objects.all().delete()  # clear the table 
     for hyper, title in instance: 
@@ -196,3 +200,32 @@ def userseesposts(request):
   return render(request, "frontend/userseesposts.html", {'allofit': accum, 'count': counter})  
 
 
+############# 
+############# 
+############# 
+############# 
+# I might be able to use this for title and url as well. Just don't change the original finallposts
+############# 
+   
+@user_passes_test(lambda user: user.is_superuser, login_url='/')
+def admin_findallposts3(request):  
+    url = 'https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts/?key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500'
+     
+    accum_list = [] 
+    response = requests.get(url, stream=True)
+    data = json.loads(response.text)
+    posts = data['items']
+    for post in posts:
+        title = post['title']
+        content = post['content']
+        url = post['url']
+         
+        print('Title:', title)
+        print('Content:', content)
+        print('---')
+        #accum_list=accum_list+[title,content, url]
+        accum_list=accum_list+[content]      
+               
+    #sys.exit()
+    
+    return render(request, 'frontend/admin_findallposts.html', {'allofit': accum_list, 'count': 0}) 
