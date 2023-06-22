@@ -15,5 +15,5 @@ urlpatterns = [
     path("keywordsearch", views.keywordsearch),  
     path("userseesposts", views.userseesposts),
   
-    path("admin_findallposts3", views.admin_findallposts3),
+     
 ]

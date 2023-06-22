@@ -1,0 +1,42 @@
+{% extends "base.html" %} 
+
+{% block content %}
+ 
+ <form action="" method="post" validate>
+   <p style="font-size: 16px">Separate your search terms with a comma, and use a minus to omit ingredients</p>
+   <p>{{ form }}  &nbsp; &nbsp;  <input style=float: right; type="submit" value="Search"> 
+ </p>
+ {% csrf_token %}
+ </form> 
+   
+  <h1>{{the_title}}</h1>
+ 
+
+  <p>
+    <!-- Below maybe I can loop through the comma separated search terms in item.0, and if any are in the title, then 
+    make the title bold. Better is to make bold the term in the title -->
+    
+<br>
+<h1>A few more examples</h1>
+ 
+<p style="font-size: 15px">cannabis, anti-inflammatory, sensory overload, hand tremors, depression, anxiety, PASC, traumatic brain injury, diagnosis code</p> 
+ 
+<br>
+<h1>Results</h1>
+<p style="font-size: 16px">Notice that if your search term is in the title, it's in bold</p>
+<p> we are in NEWkeywordsearch</p>
+<p> trimmed_list</p>
+  {% for item in trimmed_list %}
+    
+       <span style="margin-bottom: 25px"><b>{{item.0 | safe}}</b><br><a href= "{{item.1 | safe}}"> {{item.2 | safe}}</a> <br></span> <br>
+     
+     
+  {% endfor %}
+   </p> 
+  
+ </p>
+   
+{% endblock content %}
+
+ 
+ 

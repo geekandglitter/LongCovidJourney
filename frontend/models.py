@@ -12,6 +12,7 @@ class AllPosts(models.Model):
     
     user_search_terms = ArrayField(models.CharField(max_length=200), null=True, blank=True)
     url=models.TextField(max_length=500, null=True, blank=True )
+    fullpost = models.TextField(max_length=5000, null=True, blank=True)
     
     
     class Meta: # this eliminates the extra "s" added to the model name

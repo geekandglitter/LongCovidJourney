@@ -35,32 +35,30 @@ def soup_scrape(request):
 def admin_findallposts(request): 
     
     def request_by_year(edate, sdate):
-        # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.
+        # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.    
 
-        url = "https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts?endDate=" + edate + "&fetchBodies=false&maxResults=500&startDate=" + \
-            sdate + \
-            "&status=live&view=READER&fields=items(title%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk"
+        url = "https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts/?"  + "startDate=" + sdate + "&fields=items(content%2Ctitle%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500"     
 
         r = requests.get(url, stream=True)
-        q = json.loads(r.text)  # this is the better way to unstring it
+        q = json.loads(r.text)            
         if not q:
             s = []
-        else:
-            s = q['items']
+        else:            
+            s=q['items']             
         return (s)
 
     accum_list = []  # this will become a list of dictionaries
     c_year = int(d.datetime.now().year)
 
-    for the_year in range(2014, c_year + 1):
+    for the_year in range(2022, c_year ):
         enddate = str(the_year) + "-12-31T00%3A00%3A00-00%3A00"
         startdate = str(the_year) + "-01-01T00%3A00%3A00-00%3A00"
         t = request_by_year(enddate, startdate)
-        accum_list = accum_list + t
-
-    #sorteditems = sorted(accum_list, key=itemgetter('title'), reverse=True)
-    sorteditems = sorted(accum_list, key=itemgetter('title'))
+        accum_list = accum_list + t     
+    
+    sorteditems = sorted(accum_list, key=itemgetter('title'))  
     sorteditems.reverse()
+    
     counter = 0
     newstring = " "
     # Now we get ready to update the database
@@ -74,8 +72,10 @@ def admin_findallposts(request):
         newrec = AllPosts.objects.create(
             anchortext=mylink['title'],
             hyperlink="<a href=" + mylink['url'] + ">" + mylink['title'] + "</a>" + "<br>",
-            url=mylink['url']
+            url=mylink['url'],
+            fullpost=mylink['content']
         )
+         
         newrec.save()
 
     return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
@@ -189,7 +189,7 @@ def userseesposts(request):
   """
   
   all_posts = AllPosts.objects.all()
-  #print(all_posts)
+  
   accum=""
   counter=0
   for one_post in all_posts:
@@ -207,25 +207,4 @@ def userseesposts(request):
 # I might be able to use this for title and url as well. Just don't change the original finallposts
 ############# 
    
-@user_passes_test(lambda user: user.is_superuser, login_url='/')
-def admin_findallposts3(request):  
-    url = 'https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts/?key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500'
-     
-    accum_list = [] 
-    response = requests.get(url, stream=True)
-    data = json.loads(response.text)
-    posts = data['items']
-    for post in posts:
-        title = post['title']
-        content = post['content']
-        url = post['url']
-         
-        print('Title:', title)
-        print('Content:', content)
-        print('---')
-        #accum_list=accum_list+[title,content, url]
-        accum_list=accum_list+[content]      
-               
-    #sys.exit()
-    
-    return render(request, 'frontend/admin_findallposts.html', {'allofit': accum_list, 'count': 0}) 
+ 
