@@ -33,7 +33,7 @@ def search_func(user_terms):
     queryset=[None] * num_terms # Initialize queryset list with None    
     for i, term in enumerate(user_terms):
         queryset[i] = AllContents.objects.filter(fullpost__icontains=term)\
-                                         .values_list('hyperlink', 'title')   # We now have a list of querysets  
+                                         .values_list('url', 'title')   # We now have a list of querysets  
     
 
      

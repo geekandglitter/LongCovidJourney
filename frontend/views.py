@@ -81,7 +81,7 @@ def admin_findallposts(request):
 
         newrec = AllContents.objects.create(
             title=mylink['title'],
-            hyperlink=mylink['url'],
+            url=mylink['url'],
             fullpost=mylink['content']
         )
         newrec.save()  
@@ -100,7 +100,7 @@ def admin_scrape(request):
     Here's the psuedocode:
     1.Get the url and anchortext from AllPosts
     2.Delete AllContents
-    3.Loop through the hyperlinks, get post, finall inside post-body,       store contents, url and anchortext in AllContents            
+    3.Loop through the urls, get post, finall inside post-body,       store contents, url and anchortext in AllContents            
     4. Put something out to the template  
     '''
     # First, get all the urls from AllPosts
@@ -108,9 +108,9 @@ def admin_scrape(request):
     
     # For now, I'm starting over each time, by emptying out AllContents
     AllContents.objects.all().delete()  # clear the table 
-    for hyper, title in instance: 
+    for posturl, title in instance: 
          
-        getpost = requests.get(hyper)
+        getpost = requests.get(posturl)
         soup = BeautifulSoup(getpost.text, 'html.parser')            
         soup_contents = soup.find("div", class_="post-body entry-content") 
         stripped = title + soup_contents.get_text()
@@ -119,7 +119,7 @@ def admin_scrape(request):
         try: 
             newrec = AllContents.objects.create(
                 fullpost=stripped,       
-                hyperlink=hyper,
+                url=posturl,
                 title=title
             )
         except IntegrityError:

@@ -37,20 +37,20 @@ class SearchTerms(models.Model):
 
 class AllContents(models.Model):
     '''
-    This model holds hyperlinks (hrefs with anchor text)
-    These hyperlinks are then easily displayed in a template
+    This model holds urls
+ 
     ''' 
     #anchortext = models.TextField(max_length=500, null=True, blank=True)
-    hyperlink = models.TextField(max_length=500, null=True, blank=True, unique=True)
+    url = models.TextField(max_length=500, null=True, blank=True, unique=True)
     title = models.TextField(max_length=100, null=True, blank=True )     
     fullpost = models.TextField(max_length=5000, null=True, blank=True)
     
     class Meta: # this eliminates the extra "s" added to the model name
         verbose_name_plural = "AllContents"
-        ordering = ['hyperlink']    # alphabetical order    
+        ordering = ['url']    # alphabetical order    
      
     def __str__(self):
-        return self.hyperlink
+        return self.url
  
 
  
