@@ -9,10 +9,10 @@ urlpatterns = [
     path("",views.index),
     path("requrls",views.requrls),
     path("admin_findallposts", views.admin_findallposts), 
-    path("admin_indexsearch", views.admin_indexsearch),
+    path("admin_scrape", views.admin_scrape),
     path("admin_home", views.admin_home),    
     path("admin_findallposts", views.admin_findallposts),
-    path("keywordsearch", views.keywordsearch),  
+    path("usersearch", views.usersearch),  
     path("userseesposts", views.userseesposts),
   
      

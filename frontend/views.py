@@ -63,6 +63,7 @@ def admin_findallposts(request):
     newstring = " "
     # Now we get ready to update the database
     AllPosts.objects.all().delete()  # clear the table
+    AllContents.objects.all().delete()  # clear the table
     for mylink in sorteditems:
          
         counter += 1
@@ -78,25 +79,29 @@ def admin_findallposts(request):
          
         newrec.save()
 
+        newrec = AllContents.objects.create(
+            title=mylink['title'],
+            hyperlink=mylink['url'],
+            fullpost=mylink['content']
+        )
+        newrec.save()  
+          
+
     return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
 
  
 
 #############
  
-#@user_passes_test(lambda user: user.is_superuser, login_url='/')
-def admin_indexsearch(request):
+@user_passes_test(lambda user: user.is_superuser, login_url='/')
+def admin_scrape(request):
     '''
     Scrape the contents of every recipe post
     Here's the psuedocode:
-    1. Go into the AllPosts model
-    2.Retrieve all the hyperlinks and put them in a list
-    3. Loop through the hyperlinks
-        a. Get post and find everything inside post-body, eliminate all html
-        b. Store all contents in the new model AllContents.Fullpost    
-        c. Also update AllCOntents.Hyperlink        
-    4. Put something out to the template 
- 
+    1.Get the url and anchortext from AllPosts
+    2.Delete AllContents
+    3.Loop through the hyperlinks, get post, finall inside post-body,       store contents, url and anchortext in AllContents            
+    4. Put something out to the template  
     '''
     # First, get all the urls from AllPosts
     instance = AllPosts.objects.filter().values_list('url', 'anchortext')
@@ -121,7 +126,7 @@ def admin_indexsearch(request):
             return render(request, 'frontend/error')    
         newrec.save() 
              
-    return render(request, "frontend/admin_indexsearch.html", {})  
+    return render(request, "frontend/admin_scrape.html", {})  
 
 ############# 
  
@@ -130,7 +135,7 @@ def admin_home(request):
   return render(request, "frontend/admin_home.html", {})
 
 ############# 
-def keywordsearch(request):
+def usersearch(request):
     '''      
     Below I query using values_list(). The alternative would have been values() which creates a nice dictionary,
     which should be easier because I can see the keywords, but whatever. So instead I am referring to the indices:
@@ -174,12 +179,12 @@ def keywordsearch(request):
                 context.update({'form': form})             
             else:    
                 context = {'form': form}       
-            return render(request, 'frontend/keywordsearch.html', context)    
+            return render(request, 'frontend/usersearch.html', context)    
         except IndexError:
             context = {'form': form}         
     else: # This code executes the first time this view is run. It shows an empty form to the user  
         context = {'form': form}     
-    return render(request, 'frontend/keywordsearch.html', context) 
+    return render(request, 'frontend/usersearch.html', context) 
 
 
 ############# 
