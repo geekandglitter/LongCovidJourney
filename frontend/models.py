@@ -34,22 +34,4 @@ class SearchTerms(models.Model):
     def _str_(self):
         return self.searchterm
 
-class AllContents(models.Model):
-    '''
-    This model holds urls
- 
-    ''' 
-     
-    url = models.TextField(max_length=500, null=True, blank=True, unique=True)
-    title = models.TextField(max_length=100, null=True, blank=True )     
-    fullpost = models.TextField(max_length=5000, null=True, blank=True)
-    
-    class Meta: # this eliminates the extra "s" added to the model name
-        verbose_name_plural = "AllContents"
-        ordering = ['url']    # alphabetical order    
-     
-    def __str__(self):
-        return self.url
- 
-
  

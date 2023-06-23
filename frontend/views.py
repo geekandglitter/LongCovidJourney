@@ -4,8 +4,6 @@ import json
 import datetime as d
 from .models import AllPosts
 from operator import itemgetter
-from bs4 import BeautifulSoup
-from .models import AllContents
 from django.contrib.auth.decorators import user_passes_test 
 from frontend.utils import search_func # this function does the model query heavy lifting for modelsearch_view 
 from .forms import UserForm 
@@ -21,8 +19,7 @@ def is_superuser(user):
   return user.is_superuser
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
-def soup_scrape(request):
-  return render(request, "frontend/soup_scrape.html", {}) 
+ 
  
 
 ###################################################
@@ -32,7 +29,7 @@ def soup_scrape(request):
 """ 
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
-def admin_findallposts(request): 
+def admin_api(request): 
     
     def request_by_year(edate, sdate):
         # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.    
@@ -63,7 +60,7 @@ def admin_findallposts(request):
     newstring = " "
     # Now we get ready to update the database
     AllPosts.objects.all().delete()  # clear the table
-    AllContents.objects.all().delete()  # clear the table
+ 
     for mylink in sorteditems:
          
         counter += 1
@@ -78,56 +75,14 @@ def admin_findallposts(request):
         )
          
         newrec.save()
-
-        newrec = AllContents.objects.create(
-            title=mylink['title'],
-            url=mylink['url'],
-            fullpost=mylink['content']
-        )
-        newrec.save()  
+   
           
 
-    return render(request, 'frontend/admin_findallposts.html', {'allofit': newstring, 'count': counter})
+    return render(request, 'frontend/admin_api.html', {'allofit': newstring, 'count': counter})
 
  
 
-#############
  
-@user_passes_test(lambda user: user.is_superuser, login_url='/')
-def admin_scrape(request):
-    '''
-    Scrape the contents of every recipe post
-    Here's the psuedocode:
-    1.Get the url and title from AllPosts
-    2.Delete AllContents
-    3.Loop through the urls, get post, finall inside post-body, store contents, url and title in AllContents            
-    4. Put something out to the template  
-    '''
-    # First, get all the urls from AllPosts
-    instance = AllPosts.objects.filter().values_list('url', 'title')
-    
-    # For now, I'm starting over each time, by emptying out AllContents
-    AllContents.objects.all().delete()  # clear the table 
-    for posturl, title in instance: 
-         
-        getpost = requests.get(posturl)
-        soup = BeautifulSoup(getpost.text, 'html.parser')            
-        soup_contents = soup.find("div", class_="post-body entry-content") 
-        stripped = title + soup_contents.get_text()
-        stripped=stripped.replace('\n',' ') # need to replace newline with a blank
-        stripped = ' '.join(stripped.split()) # remove all multiple blanks, leave single blanks      
-        try: 
-            newrec = AllContents.objects.create(
-                fullpost=stripped,       
-                url=posturl,
-                title=title
-            )
-        except IntegrityError:
-            return render(request, 'frontend/error')    
-        newrec.save() 
-             
-    return render(request, "frontend/admin_scrape.html", {})  
-
 ############# 
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')

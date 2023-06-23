@@ -8,10 +8,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),    
     path("",views.index),
     path("requrls",views.requrls),
-    path("admin_findallposts", views.admin_findallposts), 
-    path("admin_scrape", views.admin_scrape),
-    path("admin_home", views.admin_home),    
-    path("admin_findallposts", views.admin_findallposts),
+    path("admin_api", views.admin_api), 
+    path("admin_home", views.admin_home),  
     path("usersearch", views.usersearch),  
     path("userseesposts", views.userseesposts),
   

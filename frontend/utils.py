@@ -1,6 +1,5 @@
-from operator import itemgetter
-    
-from .models import AllContents
+from operator import itemgetter    
+from .models import AllPosts
 
 def search_func(user_terms):     
     """
@@ -32,7 +31,7 @@ def search_func(user_terms):
     # Now get all the posts that match all the remaining user search terms 
     queryset=[None] * num_terms # Initialize queryset list with None    
     for i, term in enumerate(user_terms):
-        queryset[i] = AllContents.objects.filter(fullpost__icontains=term)\
+        queryset[i] = AllPosts.objects.filter(fullpost__icontains=term)\
                                          .values_list('url', 'title')   # We now have a list of querysets  
     
 
