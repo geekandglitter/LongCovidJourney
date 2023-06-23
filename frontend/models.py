@@ -7,9 +7,8 @@ class AllPosts(models.Model):
     This model holds hyperlinks (hrefs with anchor text)
     These hyperlinks are then easily displayed in a template
     ''' 
-    anchortext = models.TextField(max_length=500, null=True, blank=True)
-    hyperlink = models.TextField(max_length=500, null=True, blank=True)
-    
+    title = models.TextField(max_length=500, null=True, blank=True)
+    hyperlink = models.TextField(max_length=500, null=True, blank=True)         
     user_search_terms = ArrayField(models.CharField(max_length=200), null=True, blank=True)
     url=models.TextField(max_length=500, null=True, blank=True )
     fullpost = models.TextField(max_length=5000, null=True, blank=True)
@@ -17,7 +16,7 @@ class AllPosts(models.Model):
     
     class Meta: # this eliminates the extra "s" added to the model name
         verbose_name_plural = "AllPosts"
-        ordering = ['anchortext']    # alphabetical order    
+        ordering = ['title']    # alphabetical order    
      
     def __str__(self):
         return self.hyperlink
@@ -40,7 +39,7 @@ class AllContents(models.Model):
     This model holds urls
  
     ''' 
-    #anchortext = models.TextField(max_length=500, null=True, blank=True)
+     
     url = models.TextField(max_length=500, null=True, blank=True, unique=True)
     title = models.TextField(max_length=100, null=True, blank=True )     
     fullpost = models.TextField(max_length=5000, null=True, blank=True)

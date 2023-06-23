@@ -16,7 +16,7 @@ class Migration(migrations.Migration):
         ),
         migrations.AlterModelOptions(
             name='newallposts',
-            options={'ordering': ['anchortext'], 'verbose_name_plural': 'NEWAllPosts'},
+            options={'ordering': ['title'], 'verbose_name_plural': 'NEWAllPosts'},
         ),
         migrations.AlterModelOptions(
             name='newsearchterms',

@@ -71,7 +71,7 @@ def admin_findallposts(request):
             mylink['title'] + "</a>" + "<br>" + newstring
             # Below, notice I stuff the title in with the body. It makes the title search part of the contents search.
         newrec = AllPosts.objects.create(
-            anchortext=mylink['title'],
+            title=mylink['title'],
             hyperlink="<a href=" + mylink['url'] + ">" + mylink['title'] + "</a>" + "<br>",
             url=mylink['url'],
             fullpost=mylink['content']
@@ -98,13 +98,13 @@ def admin_scrape(request):
     '''
     Scrape the contents of every recipe post
     Here's the psuedocode:
-    1.Get the url and anchortext from AllPosts
+    1.Get the url and title from AllPosts
     2.Delete AllContents
-    3.Loop through the urls, get post, finall inside post-body,       store contents, url and anchortext in AllContents            
+    3.Loop through the urls, get post, finall inside post-body, store contents, url and title in AllContents            
     4. Put something out to the template  
     '''
     # First, get all the urls from AllPosts
-    instance = AllPosts.objects.filter().values_list('url', 'anchortext')
+    instance = AllPosts.objects.filter().values_list('url', 'title')
     
     # For now, I'm starting over each time, by emptying out AllContents
     AllContents.objects.all().delete()  # clear the table 
