@@ -7,8 +7,7 @@ from operator import itemgetter
 from django.contrib.auth.decorators import user_passes_test 
 from frontend.utils import search_func # this function does the model query heavy lifting for modelsearch_view 
 from .forms import UserForm 
-from django.db import IntegrityError
-import sys
+ 
 
 
 
@@ -34,7 +33,15 @@ def admin_api(request):
     def request_by_year(edate, sdate):
         # Initially I did the entire request at once, but I had to chunk it into years because it was timing out in windows.    
 
-        url = "https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts/?"  + "startDate=" + sdate + "&fields=items(content%2Ctitle%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500"     
+        url = "https://www.googleapis.com/blogger/v3/blogs/4571701310225125829/posts/?"  + "startDate=" + sdate + "&fields=items(content%2Ctitle%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500"    
+
+        # url = "https://www.googleapis.com/blogger/v3/blogs/4018409536126807518/posts/?"  + "startDate=" + sdate + "&fields=items(content%2Ctitle%2Curl)&key=AIzaSyBq-EPVMpROwsvmUWeo-AYAchzLuTpXLDk&maxResults=500"
+
+
+
+
+
+      
 
         r = requests.get(url, stream=True)
         q = json.loads(r.text)            

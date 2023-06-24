@@ -47,10 +47,14 @@ padding-top: 15px;
 background: transparent none repeat-x scroll top center;
 }
 .content-fauxcolumns .fauxcolumn-inner {
-background: #ffffff url(https://resources.blogblog.com/blogblog/data/1kt/ethereal/bird-2toned-blue-fade.png) repeat-x scroll top left;
+background: #ffffff /*url(https://resources.blogblog.com/blogblog/data/1kt/ethereal/bird-2toned-blue-fade.png) repeat-x scroll top left;
 border-left: 1px solid #bdfffe;
-border-right: 1px solid #bdfffe;
+border-right: 1px solid #bdfffe;*/
+url(linda.jpg) repeat-x scroll top left;
+border-left: 1px solid #bdfffe;
+border-right: 1px solid #bdfffe;  
 }
+
 /* Flexible Background
 ----------------------------------------------- */
 .content-fauxcolumn-outer .fauxborder-left {
@@ -68,9 +72,9 @@ margin-right: -299px;
 width: 299px;
 background-color: transparent;
 /* background-image: url(../img/birdsright.png); */
-background-image: url(https://themes.googleusercontent.com/image?id=0BwVBOzw_-hbMNjViMzQ0ZDEtMWU1NS00ZTBkLWFjY2EtZjM5YmU4OTA2MjBm);
+/*background-image: url(https://themes.googleusercontent.com/image?id=0BwVBOzw_-hbMNjViMzQ0ZDEtMWU1NS00ZTBkLWFjY2EtZjM5YmU4OTA2MjBm);
 background-repeat: no-repeat;
-background-position: right top;
+background-position: right top;*/
 }
 /* Columns
 ----------------------------------------------- */
@@ -87,7 +91,7 @@ margin: 0 35px;
 }
 .Header h1 {
 font: normal normal 60px Times, 'Times New Roman', FreeSerif, serif;
-color: #ff8b8b;
+color: #da8aff;
 }
 .Header h1 a {
 color: #101d51;
@@ -125,7 +129,7 @@ margin: 0 35px;
 padding: 1px;
 }
 .PageList {
-border-bottom: 1px solid #fb5e53;
+border-bottom: 1px solid #931cca;
 }
 .tabs-inner .widget li.selected a,
 .tabs-inner .widget li a:hover {
@@ -138,7 +142,7 @@ position: relative;
 -goog-ms-border-top-right-radius: 5px; */
 border-top-left-radius: 5px;
 border-top-right-radius: 5px;
-background: #ffa183 none ;
+background: #8c2bee none ;
 color: #ffffff;
 }
 .tabs-inner .widget li a {
@@ -148,7 +152,7 @@ margin-right: 1px;
 padding: .65em 1.5em;
 font: normal normal 12px Arial, Tahoma, Helvetica, FreeSans, sans-serif;
 color: #666666;
-background-color: #ffdfc7;
+background-color: #edc7ff;
 -moz-border-radius-topleft: 5px;
 -moz-border-radius-topright: 5px;
 -webkit-border-top-left-radius: 5px;
@@ -319,10 +323,12 @@ margin-top: 2em;
 ----------------------------------------------- */
 .comments .comments-content .icon.blog-author {
 background-repeat: no-repeat;
+/*  
 background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAAZiS0dEAP8A/wD/oL2nkwAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB9sLFwMeCjjhcOMAAAD+SURBVDjLtZSvTgNBEIe/WRRnm3U8RC1neQdsm1zSBIU9VVF1FkUguQQsD9ITmD7ECZIJSE4OZo9stoVjC/zc7ky+zH9hXwVwDpTAWWLrgS3QAe8AZgaAJI5zYAmc8r0G4AHYHQKVwII8PZrZFsBFkeRCABYiMh9BRUhnSkPTNCtVXYXURi1FpBDgArj8QU1eVXUzfnjv7yP7kwu1mYrkWlU33vs1QNu2qU8pwN0UpKoqokjWwCztrMuBhEhmh8bD5UDqur75asbcX0BGUB9/HAMB+r32hznJgXy2v0sGLBcyAJ1EK3LFcbo1s91JeLwAbwGYu7TP/3ZGfnXYPgAVNngtqatUNgAAAABJRU5ErkJggg==);
+*/  
 }
 .comments .comments-content .loadmore a {
-background: #ffffff url(https://resources.blogblog.com/blogblog/data/1kt/ethereal/bird-2toned-blue-fade.png) repeat-x scroll top left;
+/* background: #ffffff url(https://resources.blogblog.com/blogblog/data/1kt/ethereal/bird-2toned-blue-fade.png) repeat-x scroll top left; */
 }
 .comments .comments-content .loadmore a {
 border-top: 1px solid #dbdbdb;
@@ -355,7 +361,7 @@ opacity: 0.75;
 margin-right: 0;
 }
 .mobile-link-button {
-background-color: #ffa183;
+background-color: #b685ff;
 }
 .mobile-link-button a:link, .mobile-link-button a:visited {
 color: #ffffff;
@@ -376,7 +382,7 @@ border-bottom: none;
 margin: 0;
 }
 .mobile .tabs-inner .PageList .widget-content {
-background: #ffa183 none;
+background: #ce85ff none;
 color: #ffffff;
 }
 .mobile .tabs-inner .PageList .widget-content .pagelist-arrow {
