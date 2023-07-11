@@ -18,11 +18,9 @@ def is_superuser(user):
   return user.is_superuser
 def requrls(request): # This requests urls from the blog
   return render(request, "frontend/requrls.html", {})
- 
- 
 
-#############  
  
+#############  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_home(request):
   return render(request, "frontend/admin_home.html", {})
@@ -85,25 +83,17 @@ def userseesposts(request):
   """
   retrieve the contents of the AllPosts model
   """
-  
-  all_posts = AllPosts.objects.all()
-  
+ 
+  all_posts = AllPosts.objects.all().reverse()
+  all_posts = AllPosts.objects.all()   
   accum=""
   counter=0
   for one_post in all_posts:
     counter+=1 
-    accum=accum +(str(one_post))
+    accum=accum +(str(one_post))  
    
+  return render(request, "frontend/userseesposts.html", {'allofit': accum, 'count': counter})   
  
-  return render(request, "frontend/userseesposts.html", {'allofit': accum, 'count': counter})  
-
-
-############# 
-############# 
-############# 
-############# 
-# I might be able to use this for title and url as well. Just don't change the original finallposts
-############# 
 ###################################################
 # This view GETS the posts using Google Blogger API and "request.get" for the admin and puts the results in a model  
 ###################################################
@@ -116,7 +106,7 @@ def admin_api(request):
     accum_list = []  # this will become a list of dictionaries
     c_year = int(d.datetime.now().year)
     
-    for the_year in range(2018, c_year +1 ):
+    for the_year in range(2017, c_year +1 ):
          
         base_url = (
          "https://www.googleapis.com/"
@@ -172,6 +162,5 @@ def admin_api(request):
                   {'allofit': newstring, 'count': counter}) 
    
 ###################################################
- 
  
  

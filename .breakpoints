@@ -27,15 +27,15 @@
     "frontend/views.py": [
       {
         "id": "d81ee57d-93f0-483f-8063-2680549e3050",
-        "line": 6,
-        "version": 13440,
-        "index": 120
+        "line": 1,
+        "version": 13466,
+        "index": 0
       },
       {
         "id": "fceeb003-a864-4c6d-82c1-1247a4e27aee",
-        "line": 6,
-        "version": 13440,
-        "index": 120
+        "line": 1,
+        "version": 13466,
+        "index": 0
       }
     ],
     "templates/base.html": [
