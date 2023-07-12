@@ -9,13 +9,10 @@ import sys
 
 THE_BLOG_ID = "4571701310225125829/"
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Build paths inside the project like this:  
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
  
-
-# SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 if SECRET_KEY is None:
@@ -72,16 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'django_project.wsgi.application'
-
-
  
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 pw=os.getenv('DB_PASSWORD')
 DATABASES = {
     'default': {
@@ -93,7 +81,6 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-
 
 def main():
     """Run administrative tasks."""
@@ -110,10 +97,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
-
-
- 
+    main() 
  
 
 AUTH_PASSWORD_VALIDATORS = [
