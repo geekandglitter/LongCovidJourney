@@ -96,9 +96,9 @@ def userseesposts(request):
  
 ###################################################
 # This view GETS the posts using Google Blogger API and "request.get" for the admin and puts the results in a model  
-###################################################
-""" This view uses the Google Blogger API to retreive all the posts. All I needed was an API key.  Uses the blogger API and the requests module to get all the posts, and stores one recipe per record in the database
-""" 
+# ###################################################
+# """ This view uses the Google Blogger API to retreive all the posts. All I needed was an API key.  Uses the blogger API and the requests module to get all the posts, and stores one recipe per record in the database
+# """ 
  
 @user_passes_test(lambda user: user.is_superuser, login_url='/')
 def admin_api(request):        
@@ -107,12 +107,12 @@ def admin_api(request):
     c_year = int(d.datetime.now().year)
     
     for the_year in range(2017, c_year +1 ):
-         
+        from django.conf import settings 
         base_url = (
          "https://www.googleapis.com/"
-         "blogger/v3/blogs/4571701310225125829/"
-         "posts/?"
+         "blogger/v3/blogs/" + settings.THE_BLOG_ID + "posts/?"
         )
+         
         end_date = str(the_year) + "-12-31T00%3A00%3A00-00%3A00"
         start_date = str(the_year) + "-01-01T00%3A00%3A00-00%3A00"
         fields = "items(content%2Ctitle%2Curl)"
@@ -162,5 +162,4 @@ def admin_api(request):
                   {'allofit': newstring, 'count': counter}) 
    
 ###################################################
- 
  
