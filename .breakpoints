@@ -11,9 +11,9 @@
     "django_project/settings.py": [
       {
         "id": "21e57024-722f-46d6-9ee1-e61ef2df5fa3",
-        "line": 32,
-        "version": 203,
-        "index": 698
+        "line": 31,
+        "version": 262,
+        "index": 586
       }
     ],
     "frontend/models.py": [
@@ -28,13 +28,13 @@
       {
         "id": "d81ee57d-93f0-483f-8063-2680549e3050",
         "line": 1,
-        "version": 13466,
+        "version": 13794,
         "index": 0
       },
       {
         "id": "fceeb003-a864-4c6d-82c1-1247a4e27aee",
         "line": 1,
-        "version": 13466,
+        "version": 13794,
         "index": 0
       }
     ],
