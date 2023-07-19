@@ -1,1 +1,0 @@
-This web app does not include templates and static files at this time, but it could.

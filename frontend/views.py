@@ -38,7 +38,11 @@ def usersearch(request):
     
     form = UserForm(request.POST)       
     if request.method == 'POST': # this means the user has filled out the form     
-        try:           
+        try: 
+            if form.data['user_search_terms']=="":
+                context = {'form': form}
+                return render(request, 'frontend/usersearch.html', context)
+                
             user_terms=""   
             form.data = form.data.copy()  # Make a mutable copy
             if form.data['user_search_terms'][-1] == ",": # Ditch any trailing commas          

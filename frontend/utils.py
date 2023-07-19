@@ -13,6 +13,8 @@ def search_func(user_terms):
     1) If I type in sugar snap peas as input, it doesn't come up in bold
     2) Type in "pie" and you get too many results with "piece" or "bed" produces "cubed", "tart" leads to "start" and "starting"
     """
+    if not user_terms:
+        return(None)
     num_terms = len(user_terms) # How many search terms did the user input       
     
     q_converted=[None] * num_terms # q_converted is for when we convert from list of tuples to list of lists   
