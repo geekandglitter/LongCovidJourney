@@ -155,8 +155,10 @@ def admin_api(request):
             hyperlink="<a href=" + mylink['url'] + ">" + \
                mylink['title'] + "</a>" + "<br>",
             url=mylink['url'],
-            fullpost=mylink['content']
-        )         
+            fullpost=mylink['title'] + mylink['content'] # notice here I'm adding the title into fullpost so the title will be searched too
+        )        
+       
+      
         newrec.save() 
     return render(request, 'frontend/admin_api.html', \
                   {'allofit': newstring, 'count': counter}) 
